@@ -1,0 +1,33 @@
+<link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+
+<style>
+.body {
+    display: grid;
+    grid-template-rows: 70% 30%;
+    font-family: 'Varela Round', sans-serif;
+    height: 100vh;
+    margin: 0;
+}
+.body .quick {
+    align-items: center;
+    background: hsl(158, 97%, 47%);
+    color: hsl(0, 0%, 100%);
+    display: grid;
+    font-size: 100pt;
+    justify-items: center;
+    text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.3);
+    transition: background 250ms;
+}
+.body.__occupied .quick {
+    background: hsl(340, 100%, 66%);
+}
+.book {
+    box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.2);
+}
+</style>
+<body class="body">
+    <div class="quick">
+        <div class="name">AVAILABLE</div>
+    </div>
+    <div class="book"></div>
+</body>
