@@ -28,6 +28,11 @@
 .book {
     box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.2);
 }
+.book .title {
+    font-size: 34pt;
+    margin: 30px 0 40px;
+    text-align: center;
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/sv.js" integrity="sha256-YU0OUWNXwbPuT6iKMn3l+f4/2GkjXQ1oziq3IAhoOJM=" crossorigin="anonymous"></script>
@@ -36,19 +41,25 @@
     <div class="quick">
         <div class="status">VACANT</div>
     </div>
-    <div class="book"><button class="reserve">Reserve room</button></div>
+    <div class="book">
+        <h1 class="title">Resting room</h1>
+        <button class="reserve">Reserve room</button>
+    </div>
     <script>
         moment.locale('sv');
-        const statusElement = document.querySelector('.status');
+        const statusElement = document.querySelector('.status'),
+            reserveButton = document.querySelector('.reserve');
 
-        document.querySelector('.reserve').addEventListener('click', function() {
+            reserveButton.addEventListener('click', function() {
             document.body.classList.toggle('__occupied');
             if (document.body.classList.contains('__occupied')) {
-                document.querySelector('.status').textContent = 'Occupied';
+                statusElement.textContent = 'Occupied';
+                reserveButton.textContent = 'Release room';
             } else {
-                document.querySelector('.status').textContent = 'Vacant';
+                statusElement.textContent = 'Vacant';
+                reserveButton.textContent = 'Reserve room';
             }
             const scrambleText = new ScrambleText(statusElement).play().start();
-        })
+        });
     </script>
 </body>
