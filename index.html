@@ -47,6 +47,16 @@
     margin: auto;
     padding: 20px;
 }
+.book .clocks {
+    display: grid;
+    justify-items: center;
+}
+.book .clocks .current-time {
+    font-size: 60pt;
+}
+.book .clocks .current-date {
+    font-size: 16pt;
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/sv.js" integrity="sha256-YU0OUWNXwbPuT6iKMn3l+f4/2GkjXQ1oziq3IAhoOJM=" crossorigin="anonymous"></script>
@@ -58,13 +68,21 @@
     <div class="book">
         <h1 class="title">Resting room</h1>
         <button class="reserve">Reserve room</button>
+        <div class="clocks">
+                <div class="current-time"></div>
+                <div class="current-date"></div>
+        </div>
     </div>
     <script>
         moment.locale('sv');
-        const statusElement = document.querySelector('.status'),
-            reserveButton = document.querySelector('.reserve');
 
-            reserveButton.addEventListener('click', function() {
+        const statusElement = document.querySelector('.status'),
+            reserveButton = document.querySelector('.reserve'),
+            currentTimeElement = document.querySelector('.current-time')
+            currentDateElement = document.querySelector('.current-date');
+
+
+        reserveButton.addEventListener('click', function() {
             document.body.classList.toggle('__occupied');
             if (document.body.classList.contains('__occupied')) {
                 statusElement.textContent = 'Occupied';
@@ -75,5 +93,11 @@
             }
             const scrambleText = new ScrambleText(statusElement).play().start();
         });
+
+        (function updateTime() {
+            currentTimeElement.textContent = moment().format('HH:mm');
+            currentDateElement.textContent = moment().format('dddd, Do MMMM');
+            setTimeout(updateTime, 60000 - (Date.now() % 60000));
+        })();
     </script>
 </body>
