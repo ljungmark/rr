@@ -25,12 +25,14 @@
     background-image: url(background.jpg);
 }
 .quick .status {
-    background: rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 80%, transparent 96%);
     padding: 40px;
     text-transform: uppercase;
 }
 .book {
     box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.2);
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
 }
 .book .title {
     font-size: 34pt;
@@ -45,11 +47,12 @@
     font-family: 'Varela Round', sans-serif;
     font-size: 24pt;
     margin: auto;
-    padding: 20px;
+    padding: 40px 60px;
 }
 .book .clocks {
     display: grid;
     justify-items: center;
+    margin: 40px 0 30px;
 }
 .book .clocks .current-time {
     font-size: 60pt;
