@@ -39,15 +39,25 @@
     margin: 30px 0 40px;
     text-align: center;
 }
+.book .controls {
+    text-align: center;
+}
+.book .controls .add-more-time {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms;
+}
 .book .reserve {
     background: hsla(0, 0%, 12%, 1);
     border: 0;
     border-radius: 4px;
     color: hsl(0, 0%, 100%);
     font-family: 'Varela Round', sans-serif;
-    font-size: 24pt;
+    font-size: 18pt;
     margin: auto;
-    padding: 40px 60px;
+    max-width: 80%;
+    outline: 0;
+    padding: 24px 36px;
 }
 .book .clocks {
     display: grid;
@@ -60,6 +70,10 @@
 .book .clocks .current-date {
     font-size: 16pt;
 }
+.body.__occupied .add-more-time {
+    opacity: 1;
+    pointer-events: initial;
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/sv.js" integrity="sha256-YU0OUWNXwbPuT6iKMn3l+f4/2GkjXQ1oziq3IAhoOJM=" crossorigin="anonymous"></script>
@@ -70,7 +84,12 @@
     </div>
     <div class="book">
         <h1 class="title">Resting room</h1>
-        <button class="reserve">Reserve room</button>
+        <div class="controls">
+            <div>
+                <button class="reserve">Book for 30 minutes</button>
+            </div>
+            <a class="add-more-time" href="#">Add another 30 mins to my time</a><br>
+        </div>
         <div class="clocks">
                 <div class="current-time"></div>
                 <div class="current-date"></div>
@@ -84,15 +103,14 @@
             currentTimeElement = document.querySelector('.current-time')
             currentDateElement = document.querySelector('.current-date');
 
-
         reserveButton.addEventListener('click', function() {
             document.body.classList.toggle('__occupied');
             if (document.body.classList.contains('__occupied')) {
                 statusElement.textContent = 'Occupied';
-                reserveButton.textContent = 'Release room';
+                reserveButton.textContent = 'I\'m done, make room available for others';
             } else {
                 statusElement.textContent = 'Vacant';
-                reserveButton.textContent = 'Reserve room';
+                reserveButton.textContent = 'Book for 30 minutes';
             }
             const scrambleText = new ScrambleText(statusElement).play().start();
         });
