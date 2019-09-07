@@ -30,9 +30,9 @@
     text-transform: uppercase;
 }
 .book {
-    box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.2);
+    box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.1);
     display: grid;
-    grid-template-rows: min-content 1fr min-content;
+    grid-template-rows: min-content min-content 1fr min-content;
 }
 .book .title {
     font-size: 34pt;
@@ -87,6 +87,7 @@
     </div>
     <div class="book">
         <h1 class="title">Resting room</h1>
+        <div>Booked until</div>
         <div class="controls">
             <div>
                 <button class="reserve">Book for 30 minutes</button>
@@ -109,14 +110,25 @@
         reserveButton.addEventListener('click', function() {
             document.body.classList.toggle('__occupied');
             if (document.body.classList.contains('__occupied')) {
+                addTime();
                 statusElement.textContent = 'Occupied';
                 reserveButton.textContent = 'I\'m done, make room available for others';
             } else {
+                localStorage.removeItem('booked');
                 statusElement.textContent = 'Vacant';
                 reserveButton.textContent = 'Book for 30 minutes';
             }
             const scrambleText = new ScrambleText(statusElement).play().start();
         });
+
+        document.querySelector('.add-more-time').addEventListener('click', function() {
+            addTime();
+        });
+
+        function addTime() {
+            const time = localStorage.getItem('booked') ? moment(localStorage.getItem('booked')) : moment();
+            localStorage.setItem('booked', time.add(30, 'minutes'));
+        }
 
         (function updateTime() {
             currentTimeElement.textContent = moment().format('HH:mm');
