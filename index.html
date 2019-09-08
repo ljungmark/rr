@@ -79,7 +79,6 @@
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/sv.js" integrity="sha256-YU0OUWNXwbPuT6iKMn3l+f4/2GkjXQ1oziq3IAhoOJM=" crossorigin="anonymous"></script>
 <script src="scrambletext.js"></script>
 <body class="body">
     <div class="quick">
@@ -87,7 +86,7 @@
     </div>
     <div class="book">
         <h1 class="title">Resting room</h1>
-        <div>Booked until</div>
+        <div class="human-format"></div>
         <div class="controls">
             <div>
                 <button class="reserve">Book for 30 minutes</button>
@@ -117,6 +116,7 @@
                 localStorage.removeItem('booked');
                 statusElement.textContent = 'Vacant';
                 reserveButton.textContent = 'Book for 30 minutes';
+                displayHumanFormat();
             }
             const scrambleText = new ScrambleText(statusElement).play().start();
         });
@@ -128,12 +128,24 @@
         function addTime() {
             const time = localStorage.getItem('booked') ? moment(localStorage.getItem('booked')) : moment();
             localStorage.setItem('booked', time.add(30, 'minutes'));
+            displayHumanFormat();
+        }
+
+        function displayHumanFormat() {
+            if (document.body.classList.contains('__occupied')) {
+                const time = moment(localStorage.getItem('booked'));
+                document.querySelector('.human-format').textContent = `Available ${time.fromNow()} (at ${time.format('HH:mm')})`;
+            } else {
+                document.querySelector('.human-format').textContent = '';
+            }
+
         }
 
         (function updateTime() {
             currentTimeElement.textContent = moment().format('HH:mm');
             currentDateElement.textContent = moment().format('dddd, Do MMMM');
             setTimeout(updateTime, 60000 - (Date.now() % 60000));
+            displayHumanFormat();
         })();
     </script>
 </body>
