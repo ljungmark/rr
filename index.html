@@ -99,8 +99,6 @@
         </div>
     </div>
     <script>
-        moment.locale('sv');
-
         const statusElement = document.querySelector('.status'),
             reserveButton = document.querySelector('.reserve'),
             currentTimeElement = document.querySelector('.current-time')
@@ -127,7 +125,7 @@
 
         function addTime() {
             const time = localStorage.getItem('booked') ? moment(localStorage.getItem('booked')) : moment();
-            localStorage.setItem('booked', time.add(30, 'minutes'));
+            localStorage.setItem('booked', time.add(30, 'minutes').format('YYYY-MM-DD HH:mm'));
             displayHumanFormat();
         }
 
