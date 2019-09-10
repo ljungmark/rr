@@ -19,7 +19,7 @@
     text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.2);
     transition: background 250ms;
 }
-.body.__occupied .quick {
+html[data-state="occupied"] .quick {
     background-blend-mode: multiply;
     background-color: hsl(340, 100%, 66%);
     background-image: url(background.jpg);
@@ -44,7 +44,7 @@
     display: grid;
     text-align: center;
 }
-.book .controls .add-more-time {
+html .add-more-time {
     opacity: 0;
     pointer-events: none;
     transition: opacity 250ms;
@@ -73,7 +73,7 @@
 .book .clocks .current-date {
     font-size: 16pt;
 }
-.body.__occupied .add-more-time {
+html[data-state="occupied"] .add-more-time {
     opacity: 1;
     pointer-events: initial;
 }
@@ -90,7 +90,8 @@
         <div class="human-format"></div>
         <div class="controls">
             <div>
-                <button class="reserve">Book for 30 minutes</button>
+                    <button class="reserve">Book for 30 minutes</button>
+                    <button class="increment">Book for 30 minutes</button>
             </div>
             <a class="add-more-time" href="#">Add another 30 mins to my time</a><br>
         </div>
