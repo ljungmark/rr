@@ -79,7 +79,6 @@ html[data-state="occupied"] .add-more-time {
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
-<script src="scrambletext.js"></script>
 <script src="dist/scripts/master.js" type="module"></script>
 <body class="body">
     <div class="quick">
@@ -90,7 +89,7 @@ html[data-state="occupied"] .add-more-time {
         <div class="human-format"></div>
         <div class="controls">
             <div>
-                    <button class="reserve">Book for 30 minutes</button>
+                    <button class="clear">Book for 30 minutes</button>
                     <button class="increment">Book for 30 minutes</button>
             </div>
             <a class="add-more-time" href="#">Add another 30 mins to my time</a><br>
@@ -106,10 +105,6 @@ html[data-state="occupied"] .add-more-time {
             currentTimeElement = document.querySelector('.current-time')
             currentDateElement = document.querySelector('.current-date');
 
-        reserveButton.addEventListener('click', function() {
-            document.body.classList.toggle('__occupied');
-            updateUI();
-        });
 
         function updateUI() {
             if (document.body.classList.contains('__occupied')) {

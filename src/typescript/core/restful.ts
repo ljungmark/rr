@@ -1,3 +1,6 @@
+import ScrambleText from '../vendor/ScrambleText.js';
+
+
 enum State {
     Vacant = 'vacant',
     Occupied = 'occupied',
@@ -32,10 +35,16 @@ class Restful implements RestfulInterface {
         if (previousState !== State.Occupied) {
             this.setState(State.Occupied);
             document.querySelector('.status').textContent = 'Occupied';
-            document.querySelector('.increment').textContent = 'I\'m done, make room available for others';
 
             const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
         }
+    }
+
+    public clear(): void {
+        this.setState(State.Vacant);
+        document.querySelector('.status').textContent = 'Vacant';
+
+        const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
     }
 }
 
