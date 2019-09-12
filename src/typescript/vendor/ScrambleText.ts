@@ -10,7 +10,7 @@ var ATTR_IDLING = 'data-scramble-text-idling';
 var ATTR_RUNNING = 'data-scramble-text-running';
 
 var ScrambleText = function () {
-	function ScrambleText(el) {
+	function ScrambleText(el): void {
 		var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 		_classCallCheck(this, ScrambleText);
