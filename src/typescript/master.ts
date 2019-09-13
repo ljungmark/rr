@@ -8,6 +8,9 @@ const incrementButton = document.querySelectorAll('.increment').forEach(element 
         restful.increment();
     });
 });
+document.querySelector('.add-more-time').addEventListener('click', function() {
+    restful.increment();
+});
 const clearButton = document.querySelector('.clear').addEventListener('click', function() {
     restful.clear();
 });

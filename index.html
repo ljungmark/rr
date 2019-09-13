@@ -90,7 +90,7 @@ html .increment {
     font-size: 16pt;
 }
 html[data-state="occupied"] .clear,
-html[data-state="occupied"] .add-more-time {
+html[data-state="occupied"][data-threshold="false"] .add-more-time {
     opacity: 1;
     pointer-events: initial;
 }
@@ -140,10 +140,6 @@ html[data-state="occupied"] .increment {
             }
             const scrambleText = new ScrambleText(statusElement).play().start();
         }
-
-        document.querySelector('.add-more-time').addEventListener('click', function() {
-            addTime();
-        });
 
         function addTime() {
             const time = localStorage.getItem('booked') ? moment(localStorage.getItem('booked')) : moment();

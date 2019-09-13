@@ -16,6 +16,8 @@ class Restful implements RestfulInterface {
         this.setState();
         this.expire = moment().format('YYYY-MM-DD HH:mm');
 
+        document.querySelector('html').dataset.threshold = false;
+
         return;
     }
 
@@ -39,11 +41,22 @@ class Restful implements RestfulInterface {
 
             const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
         }
+
+        this.expire = moment(this.expire).add(30, 'minutes').format('YYYY-MM-DD HH:mm');
+        console.log(this.expire)
+        console.log(moment(this.expire).diff(moment(), 'minutes'))
+
+        if (moment(this.expire).diff(moment(), 'minutes') >= 89) {
+            document.querySelector('html').dataset.threshold = true;
+        }
     }
 
     public clear(): void {
         this.setState(State.Vacant);
+        this.expire = moment().format('YYYY-MM-DD HH:mm');
+
         document.querySelector('.status').textContent = 'Vacant';
+        document.querySelector('html').dataset.threshold = false;
 
         const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
     }
