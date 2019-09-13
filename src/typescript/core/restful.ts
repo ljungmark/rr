@@ -1,6 +1,5 @@
 import ScrambleText from '../vendor/ScrambleText.js';
 
-
 enum State {
     Vacant = 'vacant',
     Occupied = 'occupied',
@@ -11,9 +10,11 @@ interface RestfulInterface {
 
 class Restful implements RestfulInterface {
     private state: State;
+    private expire: string;
 
     constructor() {
         this.setState();
+        this.expire = moment().format('YYYY-MM-DD HH:mm');
 
         return;
     }

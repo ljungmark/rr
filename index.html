@@ -33,6 +33,18 @@ html[data-state="occupied"] .quick {
     box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.1);
     display: grid;
     grid-template-rows: min-content min-content 1fr min-content;
+    position: relative;
+}
+.book::after {
+    background: url('dist/images/mesh.png') repeat;
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
 }
 .book .title {
     font-size: 34pt;
@@ -44,9 +56,13 @@ html[data-state="occupied"] .quick {
     display: grid;
     text-align: center;
 }
+html .clear,
 html .add-more-time {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 250ms;
+}
+html .increment {
     transition: opacity 250ms;
 }
 .book .reserve {
@@ -73,9 +89,14 @@ html .add-more-time {
 .book .clocks .current-date {
     font-size: 16pt;
 }
+html[data-state="occupied"] .clear,
 html[data-state="occupied"] .add-more-time {
     opacity: 1;
     pointer-events: initial;
+}
+html[data-state="occupied"] .increment {
+    opacity: 0;
+    pointer-events: none;
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
@@ -89,8 +110,8 @@ html[data-state="occupied"] .add-more-time {
         <div class="human-format"></div>
         <div class="controls">
             <div>
-                    <button class="clear">Book for 30 minutes</button>
-                    <button class="increment">Book for 30 minutes</button>
+                <button class="clear">Book for 30 minutes</button>
+                <button class="increment">Book for 30 minutes</button>
             </div>
             <a class="add-more-time" href="#">Add another 30 mins to my time</a><br>
         </div>
