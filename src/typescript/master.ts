@@ -17,5 +17,5 @@ const clearButton = document.querySelector('.clear').addEventListener('click', f
 
 (function update() {
     restful.update();
-    setTimeout(update, 59999 - (Date.now() % 59999));
+    setTimeout(update, 60000 - (Date.now() % 60000));
 })();

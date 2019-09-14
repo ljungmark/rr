@@ -14,7 +14,7 @@ class Restful implements RestfulInterface {
 
     constructor() {
         this.setState();
-        this.expire = moment().format('YYYY-MM-DD HH:mm');
+        this.expire = moment().format('YYYY-MM-DD HH:mm:ss');
 
         document.body.dataset.threshold = 'false';
 
@@ -35,13 +35,14 @@ class Restful implements RestfulInterface {
         const time = moment(this.expire);
 
         if (this.state === State.Occupied) {
-            document.querySelector('.human-format').textContent = `Available ${time.fromNow()} (at ${time.format('HH:mm')})`;
-        } else if (document.querySelector('.human-format').textContent.length > 0) {
-            document.querySelector('.human-format').textContent = '';
+            document.querySelector('.human-format').textContent = `Available in ${time.fromNow(true)}`;
+        } else if (!document.querySelector('.human-format').textContent.length > 0) {
         }
+        console.log(moment(this.expire).diff(moment(), 'minutes'));
 
         if (this.state === State.Occupied && moment(this.expire).diff(moment(), 'minutes') < 0) {
             this.setState(State.Vacant);
+            document.querySelector('.human-format').textContent = '';
         }
     }
 
@@ -53,10 +54,10 @@ class Restful implements RestfulInterface {
         }
 
         if (moment().isAfter(this.expire)) {
-            this.expire = moment().format('YYYY-MM-DD HH:mm');
+            this.expire = moment().format('YYYY-MM-DD HH:mm:ss');
         }
 
-        this.expire = moment(this.expire).add(30, 'minutes').format('YYYY-MM-DD HH:mm');
+        this.expire = moment(this.expire).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss');
 
         if (document.body.dataset.threshold = 'false' && moment(this.expire).diff(moment(), 'minutes') >= 90) {
             document.body.dataset.threshold = 'true';
@@ -69,7 +70,7 @@ class Restful implements RestfulInterface {
 
     public clear(): void {
         this.setState(State.Vacant);
-        this.expire = moment().format('YYYY-MM-DD HH:mm');
+        this.expire = moment().format('YYYY-MM-DD HH:mm:ss');
 
         document.body.dataset.threshold = 'false';
 
