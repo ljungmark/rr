@@ -19,7 +19,7 @@
     text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.2);
     transition: background 250ms;
 }
-html[data-state="occupied"] .quick {
+.body[data-state="occupied"] .quick {
     background-blend-mode: multiply;
     background-color: hsl(340, 100%, 66%);
     background-image: url(background.jpg);
@@ -56,13 +56,13 @@ html[data-state="occupied"] .quick {
     display: grid;
     text-align: center;
 }
-html .clear,
-html .add-more-time {
+.body .clear,
+.body .add-more-time {
     opacity: 0;
     pointer-events: none;
     transition: opacity 250ms;
 }
-html .increment {
+.body .increment {
     transition: opacity 250ms;
 }
 .book .reserve {
@@ -89,12 +89,12 @@ html .increment {
 .book .clocks .current-date {
     font-size: 16pt;
 }
-html[data-state="occupied"] .clear,
-html[data-state="occupied"][data-threshold="false"] .add-more-time {
+.body[data-state="occupied"] .clear,
+.body[data-state="occupied"][data-threshold="false"] .add-more-time {
     opacity: 1;
     pointer-events: initial;
 }
-html[data-state="occupied"] .increment {
+.body[data-state="occupied"] .increment {
     opacity: 0;
     pointer-events: none;
 }
@@ -110,8 +110,8 @@ html[data-state="occupied"] .increment {
         <div class="human-format"></div>
         <div class="controls">
             <div>
-                <button class="clear">Book for 30 minutes</button>
-                <button class="increment">Book for 30 minutes</button>
+                <div class="clear">I'm done, make room available for others</div>
+                <div class="increment">Book for 30 minutes</div>
             </div>
             <a class="add-more-time" href="#">Add another 30 mins to my time</a><br>
         </div>

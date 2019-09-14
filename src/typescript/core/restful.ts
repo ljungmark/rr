@@ -16,7 +16,7 @@ class Restful implements RestfulInterface {
         this.setState();
         this.expire = moment().format('YYYY-MM-DD HH:mm');
 
-        document.querySelector('html').dataset.threshold = false;
+        document.body.dataset.threshold = 'false';
 
         return;
     }
@@ -25,11 +25,24 @@ class Restful implements RestfulInterface {
         if (state == null) { state = State.Vacant; }
 
         this.state = state;
-        document.querySelector('html').dataset.state = state;
+        document.body.dataset.state = state;
+
+        document.querySelector('.status').textContent = (this.state === State.Vacant) ? 'Vacant' : 'Occupied';
+        const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
     }
 
     public update(): void {
-        console.log('update');
+        const time = moment(this.expire);
+
+        if (this.state === State.Occupied) {
+            document.querySelector('.human-format').textContent = `Available ${time.fromNow()} (at ${time.format('HH:mm')})`;
+        } else if (document.querySelector('.human-format').textContent.length > 0) {
+            document.querySelector('.human-format').textContent = '';
+        }
+
+        if (this.state === State.Occupied && moment(this.expire).diff(moment(), 'minutes') < 0) {
+            this.setState(State.Vacant);
+        }
     }
 
     public increment(): void {
@@ -37,28 +50,30 @@ class Restful implements RestfulInterface {
 
         if (previousState !== State.Occupied) {
             this.setState(State.Occupied);
-            document.querySelector('.status').textContent = 'Occupied';
+        }
 
-            const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
+        if (moment().isAfter(this.expire)) {
+            this.expire = moment().format('YYYY-MM-DD HH:mm');
         }
 
         this.expire = moment(this.expire).add(30, 'minutes').format('YYYY-MM-DD HH:mm');
-        console.log(this.expire)
-        console.log(moment(this.expire).diff(moment(), 'minutes'))
 
-        if (moment(this.expire).diff(moment(), 'minutes') >= 89) {
-            document.querySelector('html').dataset.threshold = true;
+        if (document.body.dataset.threshold = 'false' && moment(this.expire).diff(moment(), 'minutes') >= 90) {
+            document.body.dataset.threshold = 'true';
+        } else if (document.body.dataset.threshold = 'true' && moment(this.expire).diff(moment(), 'minutes') < 90) {
+            document.body.dataset.threshold = 'false';
         }
+
+        this.update();
     }
 
     public clear(): void {
         this.setState(State.Vacant);
         this.expire = moment().format('YYYY-MM-DD HH:mm');
 
-        document.querySelector('.status').textContent = 'Vacant';
-        document.querySelector('html').dataset.threshold = false;
+        document.body.dataset.threshold = 'false';
 
-        const scrambleText = new ScrambleText(document.querySelector('.status')).play().start();
+        this.update();
     }
 }
 
