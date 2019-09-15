@@ -16,6 +16,8 @@ const clearButton = document.querySelector('.clear').addEventListener('click', f
 });
 
 (function update() {
+    document.querySelector('.current-time').textContent = moment().format('HH:mm');
+    document.querySelector('.current-date').textContent = moment().format('dddd, Do MMMM');
     restful.update();
     setTimeout(update, 60000 - (Date.now() % 60000));
 })();

@@ -36,9 +36,7 @@ class Restful implements RestfulInterface {
 
         if (this.state === State.Occupied) {
             document.querySelector('.human-format').textContent = `Available in ${time.fromNow(true)}`;
-        } else if (!document.querySelector('.human-format').textContent.length > 0) {
         }
-        console.log(moment(this.expire).diff(moment(), 'minutes'));
 
         if (this.state === State.Occupied && moment(this.expire).diff(moment(), 'minutes') < 0) {
             this.setState(State.Vacant);

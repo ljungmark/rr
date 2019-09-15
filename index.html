@@ -1,6 +1,7 @@
 <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 <style>
 .body {
+    color: #1A202C;
     display: grid;
     grid-template-columns: 60% 40%;
     font-family: 'Varela Round', sans-serif;
@@ -67,15 +68,22 @@
 .body .increment {
     transition: opacity 250ms;
 }
-.book .reserve {
-    background: hsla(0, 0%, 12%, 1);
+.book .increment,
+.book .add-more-time {
+    position: absolute;
+}
+.book .increment,
+.book .clear,
+.book .add-more-time {
+    background: #1A202C;
     border: 0;
     border-radius: 4px;
     color: hsl(0, 0%, 100%);
+    display: block;
     font-family: 'Varela Round', sans-serif;
     font-size: 18pt;
     margin: auto;
-    max-width: 80%;
+    max-width: 70%;
     outline: 0;
     padding: 24px 36px;
 }
@@ -112,57 +120,14 @@
         <div class="human-format"></div>
         <div class="controls">
             <div>
-                <div class="clear">I'm done, make room available for others</div>
-                <div class="increment">Book for 30 minutes</div>
+                <a class="clear">I'm done, make room available for others</a>
+                <a class="increment">Book for 30 minutes</a>
             </div>
-            <a class="add-more-time" href="#">Add another 30 mins to my time</a><br>
+            <a class="add-more-time">Add another 30 mins to my time</a><br>
         </div>
         <div class="clocks">
                 <div class="current-time"></div>
                 <div class="current-date"></div>
         </div>
     </div>
-    <script>
-        const statusElement = document.querySelector('.status'),
-            reserveButton = document.querySelector('.reserve'),
-            currentTimeElement = document.querySelector('.current-time')
-            currentDateElement = document.querySelector('.current-date');
-
-
-        function updateUI() {
-            if (document.body.classList.contains('__occupied')) {
-                addTime();
-                statusElement.textContent = 'Occupied';
-                reserveButton.textContent = 'I\'m done, make room available for others';
-            } else {
-                localStorage.removeItem('booked');
-                statusElement.textContent = 'Vacant';
-                reserveButton.textContent = 'Book for 30 minutes';
-                displayHumanFormat();
-            }
-            const scrambleText = new ScrambleText(statusElement).play().start();
-        }
-
-        function addTime() {
-            const time = localStorage.getItem('booked') ? moment(localStorage.getItem('booked')) : moment();
-            localStorage.setItem('booked', time.add(30, 'minutes').format('YYYY-MM-DD HH:mm'));
-            displayHumanFormat();
-        }
-
-        function displayHumanFormat() {
-            if (document.body.classList.contains('__occupied')) {
-                const time = moment(localStorage.getItem('booked'));
-                document.querySelector('.human-format').textContent = `Available ${time.fromNow()} (at ${time.format('HH:mm')})`;
-            } else {
-                document.querySelector('.human-format').textContent = '';
-            }
-        }
-
-        (function updateTime() {
-            currentTimeElement.textContent = moment().format('HH:mm');
-            currentDateElement.textContent = moment().format('dddd, Do MMMM');
-            setTimeout(updateTime, 60000 - (Date.now() % 60000));
-            displayHumanFormat();
-        })();
-    </script>
 </body>
