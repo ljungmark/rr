@@ -33,7 +33,7 @@
 .book {
     box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.1);
     display: grid;
-    grid-template-rows: 120px 176px 1fr min-content;
+    grid-template-rows: 120px 1fr min-content;
     position: relative;
 }
 .book::after {
@@ -101,8 +101,27 @@
     pointer-events: initial;
 }
 .body[data-state="occupied"] .increment {
+    display: none;
     opacity: 0;
     pointer-events: none;
+}
+.allocation {
+    width: 358px;
+    height: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    background-color: white;
+    border: 1px solid #1A202C;
+    overflow: hidden;
+    border-radius: 4px;
+}
+::-webkit-progress-bar {
+    background-color: white;
+}
+
+.allocation::-webkit-progress-value {
+  transition: width 1s;
+  background-color: #1A202C;
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
@@ -113,10 +132,13 @@
     </div>
     <div class="book">
         <h1 class="title">Resting room</h1>
-        <div class="human-format"></div>
         <div class="controls">
+            <div class="human-format">Available now</div>
+            <progress class="allocation" max="119" value="0"></progress>
             <div>
                 <a class="increment">Book for 30 minutes</a>
+            </div>
+            <div>
                 <a class="add-more-time">Add another 30 mins to my time</a><br>
                 <a class="clear">I'm done, make room available for others</a>
             </div>

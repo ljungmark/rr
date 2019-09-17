@@ -33,15 +33,18 @@ class Restful implements RestfulInterface {
 
     public update(): void {
         const time = moment(this.expire);
+        const diff = moment(this.expire).diff(moment(), 'minutes');
+        const shouldBeVacant = diff <= 0;
 
-        if (this.state === State.Occupied) {
+        if (!shouldBeVacant && this.state === State.Occupied) {
             document.querySelector('.human-format').textContent = `Available ${moment().to(time)}`;
         }
-
-        if (this.state === State.Occupied && moment(this.expire).diff(moment(), 'minutes') < 0) {
+        if (shouldBeVacant && this.state === State.Occupied) {
             this.setState(State.Vacant);
-            document.querySelector('.human-format').textContent = '';
+            document.querySelector('.human-format').textContent = 'Available now';
         }
+
+        document.querySelector('.allocation').value = diff;
     }
 
     public increment(): void {
@@ -55,7 +58,9 @@ class Restful implements RestfulInterface {
             this.expire = moment().format('YYYY-MM-DD HH:mm:ss');
         }
 
-        this.expire = moment(this.expire).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss');
+        this.expire = moment(this.expire).add(2, 'minutes').format('YYYY-MM-DD HH:mm:ss');
+
+        document.querySelector('.allocation').value = moment(this.expire).diff(moment(), 'minutes');
 
         if (document.body.dataset.threshold = 'false' && moment(this.expire).diff(moment(), 'minutes') >= 90) {
             document.body.dataset.threshold = 'true';
@@ -67,11 +72,7 @@ class Restful implements RestfulInterface {
     }
 
     public clear(): void {
-        this.setState(State.Vacant);
         this.expire = moment().format('YYYY-MM-DD HH:mm:ss');
-
-        document.body.dataset.threshold = 'false';
-
         this.update();
     }
 }
