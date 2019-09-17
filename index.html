@@ -57,7 +57,10 @@
     text-align: center;
 }
 .book .controls {
-    text-align: center;
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-gap: 0;
+    justify-items: center;
 }
 .body .clear,
 .body .add-more-time {
@@ -105,23 +108,41 @@
     opacity: 0;
     pointer-events: none;
 }
-.allocation {
-    width: 358px;
-    height: 20px;
-    border-radius: 10px;
-    margin-bottom: 40px;
-    background-color: white;
-    border: 1px solid #1A202C;
+.progress {
+  background: #e8e9eb;
+  border-radius: 7px;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.3);
+  color: #f9d69d;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 16px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.progress-bar {
+    background: #1A202C;
+    border: 1px solid hsla(0, 0%, 100%, 0.05);
+    border-radius: 16px;
+    box-shadow: inset 0 1px 2px hsla(0, 0%, 0%, 0.1);
+    height: 30px;
+    line-height: 32px;
+    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
+    display: block;
+    width: 320px;
     overflow: hidden;
+}
+.progress-bar__variant {
+    background: white;
     border-radius: 4px;
-}
-::-webkit-progress-bar {
-    background-color: white;
-}
-
-.allocation::-webkit-progress-value {
-  transition: width 1s;
-  background-color: #1A202C;
+    color: #2b2b2b;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    transition: width 500ms;
+    width: 0%;
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
@@ -134,7 +155,9 @@
         <h1 class="title">Resting room</h1>
         <div class="controls">
             <div class="human-format">Available now</div>
-            <progress class="allocation" max="119" value="0"></progress>
+            <div class="progress-bar">
+                <div class="progress-bar__variant"></div>
+            </div>
             <div>
                 <a class="increment">Book for 30 minutes</a>
             </div>
