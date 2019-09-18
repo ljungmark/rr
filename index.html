@@ -1,27 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
 <style>
-.body .quick {
-    align-items: center;
-    background-blend-mode: multiply;
-    background-color: hsl(158, 97%, 47%);
-    background-image: url(background.jpg);
-    background-size: cover;
-    color: hsl(0, 0%, 100%);
-    display: grid;
-    font-size: 60pt;
-    text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.2);
-    transition: background 250ms;
-}
-.body[data-state="occupied"] .quick {
-    background-blend-mode: multiply;
-    background-color: hsl(340, 100%, 66%);
-    background-image: url(background.jpg);
-}
-.quick .status {
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 80%, transparent 96%);
-    padding: 40px;
-    text-transform: uppercase;
-}
 .book {
     box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.1);
     display: grid;
@@ -141,7 +119,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 <script src="dist/scripts/master.js" type="module"></script>
 <body class="body">
-    <div class="quick">
+    <div class="glance">
         <div class="status">VACANT</div>
     </div>
     <div class="book">

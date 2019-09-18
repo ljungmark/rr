@@ -1,0 +1,22 @@
+.body .glance {
+    align-items: center;
+    background-blend-mode: multiply;
+    background-color: hsl(158, 97%, 47%);
+    background-image: url('/background.jpg');
+    background-size: cover;
+    color: hsl(0, 0%, 100%);
+    display: grid;
+    font-size: 60pt;
+    text-shadow: 1px 1px 2px hsla(0, 0%, 0%, 0.2);
+    transition: background 250ms;
+}
+.body[data-state="occupied"] .glance {
+    background-blend-mode: multiply;
+    background-color: hsl(340, 100%, 66%);
+    background-image: url('/background.jpg');
+}
+.glance .status {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 80%, transparent 96%);
+    padding: 40px;
+    text-transform: uppercase;
+}
