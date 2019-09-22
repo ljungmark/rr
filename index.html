@@ -1,4 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/dist/styles/master.css">
 <style>
 .book {
     box-shadow: -6px 0px 6px 0px hsla(0, 0%, 0%, 0.1);
@@ -47,14 +48,13 @@
     background: #1A202C;
     border: 0;
     border-radius: 4px;
+    box-sizing: border-box;
     color: hsl(0, 0%, 100%);
     display: block;
     font-family: 'Varela Round', sans-serif;
     font-size: 18pt;
     margin: auto;
-    max-width: 70%;
     outline: 0;
-    padding: 24px 36px;
 }
 .book .clocks {
     display: grid;
@@ -102,8 +102,31 @@
     transition: width 500ms;
     width: 0%;
 }
+.controls .icon-compartment {
+    background: #010202;
+    border-radius: 4px;
+    padding: 10px;
+    display: grid;
+    align-items: center;
+}
+.controls .text {
+    padding: 10px;
+}
+.controls .clear .icon {
+    transform: rotate(45deg);
+}
+.controls .description {
+    display: block;
+    font-size: 10pt;
+}
+.increment,
+.add-more-time,
+.clear {
+    display: grid!important;
+    grid-template-columns: min-content 1fr;
+    width: 320px;
+}
 </style>
-<link rel="stylesheet" href="/dist/styles/master.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
 <script src="dist/scripts/master.js" type="module"></script>
 <body class="body">
@@ -118,11 +141,32 @@
                 <div class="progress-bar__variant"></div>
             </div>
             <div>
-                <a class="increment">Book for 30 minutes</a>
+                <a class="increment">
+                    <div class="icon-compartment">
+                        <img class="icon" src="/dist/svgs/plus.svg" height="40px" width="40px" />
+                    </div>
+                    <div class="text">
+                        Book<span class="description">Reserve the room for 30 minutes</span>
+                    </div>
+                </a>
             </div>
             <div>
-                <a class="add-more-time">Add another 30 mins to my time</a><br>
-                <a class="clear">I'm done, make room available for others</a>
+                <a class="add-more-time">
+                    <div class="icon-compartment">
+                        <img class="icon" src="/dist/svgs/plus.svg" height="40px" width="40px" />
+                    </div>
+                    <div class="text">
+                        I need more time<span class="description">Add another 30 minutes</span>
+                    </div>
+                </a><br>
+                <a class="clear">
+                    <div class="icon-compartment">
+                        <img class="icon" src="/dist/svgs/plus.svg" height="40px" width="40px" />
+                    </div>
+                    <div class="text">
+                        I'm all done<span class="description">Make the room available for others</span>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="clocks">
