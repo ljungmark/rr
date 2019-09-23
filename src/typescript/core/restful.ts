@@ -5,6 +5,11 @@ enum State {
     Occupied = 'occupied',
 }
 
+enum ExpireRanges {
+    Add = 'add',
+    Reset = 'reset',
+}
+
 interface RestfulInterface {
 }
 
@@ -34,7 +39,7 @@ class Restful implements RestfulInterface {
     public update(): void {
         const time = moment(this.expire);
         const diff = moment(this.expire).diff(moment(), 'minutes');
-        const shouldBeVacant = diff <= 0;
+        const shouldBeVacant = diff < 0;
 
         if (!shouldBeVacant && this.state === State.Occupied) {
             document.querySelector('.human-format').textContent = `Available ${moment().to(time)}`;
@@ -58,7 +63,7 @@ class Restful implements RestfulInterface {
             this.expire = moment();
         }
 
-        this.expire = moment(this.expire).add(30, 'minutes');
+        this.setExpire(ExpireRanges.Add);
 
         if (document.body.dataset.threshold = 'false' && moment(this.expire).diff(moment(), 'minutes') >= 90) {
             document.body.dataset.threshold = 'true';
@@ -70,8 +75,21 @@ class Restful implements RestfulInterface {
     }
 
     public clear(): void {
-        this.expire = moment();
+        this.setExpire(ExpireRanges.Reset);
         this.update();
+    }
+
+    private setExpire(operation: ExpireRanges) {
+        switch(operation) {
+            case ExpireRanges.Add: {
+                this.expire = moment(this.expire).add(30, 'minutes');
+                break;
+            }
+            case ExpireRanges.Reset: {
+                this.expire = moment().subtract(1, 'minute');
+               break;
+            }
+         }
     }
 }
 
