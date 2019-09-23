@@ -49,7 +49,20 @@ class Restful implements RestfulInterface {
             document.querySelector('.human-format').textContent = 'Available now';
         }
 
+        if (document.body.dataset.threshold = 'false' && this.expire.diff(moment(), 'minutes') >= 90) {
+            document.body.dataset.threshold = 'true';
+        } else if (document.body.dataset.threshold = 'true' && this.expire.diff(moment(), 'minutes') < 90) {
+            document.body.dataset.threshold = 'false';
+        }
+
         document.querySelector('.progress-bar__variant').style.width = Math.ceil((diff / 120) * 100) + '%';
+
+        this.render();
+    }
+
+    private render(): void {
+        document.querySelector('.current-time').textContent = moment().format('HH:mm');
+        document.querySelector('.current-date').textContent = moment().format('dddd, MMMM Do');
     }
 
     public increment(): void {
@@ -65,12 +78,6 @@ class Restful implements RestfulInterface {
 
         this.setExpire(ExpireRanges.Add);
 
-        if (document.body.dataset.threshold = 'false' && this.expire.diff(moment(), 'minutes') >= 90) {
-            document.body.dataset.threshold = 'true';
-        } else if (document.body.dataset.threshold = 'true' && this.expire.diff(moment(), 'minutes') < 90) {
-            document.body.dataset.threshold = 'false';
-        }
-
         this.update();
     }
 
@@ -82,7 +89,7 @@ class Restful implements RestfulInterface {
     private setExpire(operation: ExpireRanges) {
         switch(operation) {
             case ExpireRanges.Add: {
-                this.expire = moment(this.expire).add(30, 'minutes');
+                this.expire = moment(this.expire).add(31, 'minutes');
                 break;
             }
             case ExpireRanges.Reset: {
