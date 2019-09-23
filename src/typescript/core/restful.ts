@@ -16,10 +16,11 @@ interface RestfulInterface {
 class Restful implements RestfulInterface {
     private state: State;
     private expire: string;
+    private accept: boolean;
 
     constructor() {
         this.setState();
-        this.expire = moment().format('YYYY-MM-DD HH:mm:ss');
+        this.expire = moment();
 
         document.body.dataset.threshold = 'false';
 
@@ -37,12 +38,11 @@ class Restful implements RestfulInterface {
     }
 
     public update(): void {
-        const time = moment(this.expire);
-        const diff = moment(this.expire).diff(moment(), 'minutes');
+        const diff = this.expire.diff(moment(), 'minutes');
         const shouldBeVacant = diff < 0;
 
         if (!shouldBeVacant && this.state === State.Occupied) {
-            document.querySelector('.human-format').textContent = `Available ${moment().to(time)}`;
+            document.querySelector('.human-format').textContent = `Available ${moment().to(this.expire)}`;
         }
         if (shouldBeVacant && this.state === State.Occupied) {
             this.setState(State.Vacant);
@@ -65,9 +65,9 @@ class Restful implements RestfulInterface {
 
         this.setExpire(ExpireRanges.Add);
 
-        if (document.body.dataset.threshold = 'false' && moment(this.expire).diff(moment(), 'minutes') >= 90) {
+        if (document.body.dataset.threshold = 'false' && this.expire.diff(moment(), 'minutes') >= 90) {
             document.body.dataset.threshold = 'true';
-        } else if (document.body.dataset.threshold = 'true' && moment(this.expire).diff(moment(), 'minutes') < 90) {
+        } else if (document.body.dataset.threshold = 'true' && this.expire.diff(moment(), 'minutes') < 90) {
             document.body.dataset.threshold = 'false';
         }
 
