@@ -89,7 +89,7 @@ class Restful implements RestfulInterface {
     private setExpire(operation: ExpireRanges) {
         switch(operation) {
             case ExpireRanges.Add: {
-                this.expire = moment(this.expire).add(31, 'minutes');
+                this.expire = moment(this.expire).add(30, 'minutes');
                 break;
             }
             case ExpireRanges.Reset: {
