@@ -5,7 +5,7 @@
     position: relative;
 }
 .panel::after {
-    background: url('dist/images/mesh.png') repeat;
+    background: url('/dist/images/mesh.png') repeat;
     bottom: 0;
     content: '';
     left: 0;

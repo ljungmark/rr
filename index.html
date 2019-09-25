@@ -47,7 +47,7 @@
     font-size: 16pt;
 }
 .body[data-state="occupied"] .clear,
-.body[data-state="occupied"][data-threshold="false"] .add-more-time {
+.body[data-state="occupied"][data-accept="true"] .add-more-time {
     opacity: 1;
     pointer-events: initial;
 }
@@ -118,7 +118,7 @@
             <div class="progress-bar">
                 <div class="progress-bar__variant"></div>
             </div>
-            <div>
+            <div class="control-set">
                 <a class="increment">
                     <div class="icon-compartment">
                         <img class="icon" src="/dist/svgs/plus.svg" height="40px" width="40px" />
@@ -128,7 +128,7 @@
                     </div>
                 </a>
             </div>
-            <div>
+            <div class="control-set">
                 <a class="add-more-time">
                     <div class="icon-compartment">
                         <img class="icon" src="/dist/svgs/plus.svg" height="40px" width="40px" />

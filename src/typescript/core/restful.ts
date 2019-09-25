@@ -22,7 +22,7 @@ class Restful implements RestfulInterface {
         this.setState();
         this.expire = moment();
 
-        document.body.dataset.threshold = 'false';
+        document.body.dataset.accept = 'true';
 
         return;
     }
@@ -49,10 +49,12 @@ class Restful implements RestfulInterface {
             document.querySelector('.human-format').textContent = 'Available now';
         }
 
-        if (document.body.dataset.threshold = 'false' && this.expire.diff(moment(), 'minutes') >= 90) {
-            document.body.dataset.threshold = 'true';
-        } else if (document.body.dataset.threshold = 'true' && this.expire.diff(moment(), 'minutes') < 90) {
-            document.body.dataset.threshold = 'false';
+        if (this.accept = 'true' && this.expire.diff(moment(), 'minutes') >= 90) {
+            this.accept = 'false';
+            document.body.dataset.accept = this.accept;
+        } else if (this.accept = 'false' && this.expire.diff(moment(), 'minutes') < 90) {
+            this.accept = 'true';
+            document.body.dataset.accept = this.accept;
         }
 
         document.querySelector('.progress-bar__variant').style.width = Math.ceil((diff / 120) * 100) + '%';
