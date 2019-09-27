@@ -43,7 +43,7 @@ var Restful = /** @class */ (function () {
             this.accept = 'true';
             document.body.dataset.accept = this.accept;
         }
-        document.querySelector('.progress-bar__variant').style.width = Math.ceil((diff / 120) * 100) + '%';
+        document.querySelector('.time-visualization .bar').style.width = Math.ceil((diff / 120) * 100) + '%';
         this.render();
     };
     Restful.prototype.render = function () {

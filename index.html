@@ -9,7 +9,6 @@
     display: grid;
     grid-auto-rows: min-content;
     grid-gap: 0;
-    justify-items: center;
 }
 .body .clear,
 .body .add-more-time {
@@ -19,20 +18,6 @@
 }
 .body .increment {
     transition: opacity 250ms;
-}
-.panel .increment,
-.panel .clear,
-.panel .add-more-time {
-    background: #1A202C;
-    border: 0;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: hsl(0, 0%, 100%);
-    display: block;
-    font-family: 'Varela Round', sans-serif;
-    font-size: 18pt;
-    margin: auto;
-    outline: 0;
 }
 .panel .clocks {
     display: grid;
@@ -46,63 +31,21 @@
 .panel .clocks .current-date {
     font-size: 16pt;
 }
-.body[data-state="occupied"] .clear,
-.body[data-state="occupied"][data-accept="true"] .add-more-time {
-    opacity: 1;
-    pointer-events: initial;
-}
-.body[data-state="occupied"] .increment {
-    display: none;
+.body .occupied-controls {
     opacity: 0;
     pointer-events: none;
 }
-.progress-bar {
-    background: #1A202C;
-    border: 3px solid hsla(0, 0%, 100%, 0.05);
-    border-radius: 16px;
-    box-shadow: inset 0 1px 2px hsla(0, 0%, 0%, 0.1);
-    height: 30px;
-    line-height: 32px;
-    margin-bottom: 20px;
-    position: relative;
-    text-align: center;
-    display: block;
-    width: 320px;
-    overflow: hidden;
+.body[data-state="occupied"] .occupied-controls {
+    opacity: 1;
+    pointer-events: initial;
 }
-.progress-bar__variant {
-    background: white;
-    border-radius: 4px;
-    color: #2b2b2b;
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    transition: width 500ms;
-    width: 0%;
+.body[data-state="occupied"][data-accept="true"] .clear {
+    opacity: 1;
+    pointer-events: initial;
 }
-.controls .icon-compartment {
-    background: #010202;
-    border-radius: 4px;
-    padding: 10px;
-    display: grid;
-    align-items: center;
-}
-.controls .text {
-    padding: 10px;
-}
-.controls .clear .icon {
-    transform: rotate(45deg);
-}
-.controls .description {
-    display: block;
-    font-size: 10pt;
-}
-.increment,
-.add-more-time,
-.clear {
-    display: grid!important;
-    grid-template-columns: min-content 1fr;
-    width: 320px;
+.body[data-state="occupied"] .vacant-controls {
+    opacity: 0;
+    pointer-events: none;
 }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
@@ -115,36 +58,38 @@
         <h1 class="title">Resting room</h1>
         <div class="controls">
             <div class="human-format">Available now</div>
-            <div class="progress-bar">
-                <div class="progress-bar__variant"></div>
+            <div class="time-visualization">
+                <div class="bar"></div>
             </div>
-            <div class="control-set">
-                <a class="increment">
-                    <div class="icon-compartment">
-                        <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
-                    </div>
-                    <div class="text">
-                        Book<span class="description">Reserve the room for 30 minutes</span>
-                    </div>
-                </a>
-            </div>
-            <div class="control-set">
-                <a class="add-more-time">
-                    <div class="icon-compartment">
-                        <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
-                    </div>
-                    <div class="text">
-                        I need more time<span class="description">Add another 30 minutes</span>
-                    </div>
-                </a><br>
-                <a class="clear">
-                    <div class="icon-compartment">
-                        <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
-                    </div>
-                    <div class="text">
-                        I'm all done<span class="description">Make the room available for others</span>
-                    </div>
-                </a>
+            <div class="control-sets">
+                <div class="control-set vacant-controls">
+                    <a class="button increment">
+                        <div class="icon-compartment">
+                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
+                        </div>
+                        <div class="text">
+                            Book<span class="description">Reserve the room for 30 minutes</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="control-set occupied-controls">
+                    <a class="button add-more-time">
+                        <div class="icon-compartment">
+                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
+                        </div>
+                        <div class="text">
+                            I need more time<span class="description">Add another 30 minutes</span>
+                        </div>
+                    </a><br>
+                    <a class="button clear">
+                        <div class="icon-compartment">
+                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
+                        </div>
+                        <div class="text">
+                            I'm all done<span class="description">Make the room available for others</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="clocks">
