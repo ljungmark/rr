@@ -10,12 +10,6 @@
     grid-auto-rows: min-content;
     grid-gap: 0;
 }
-.body .clear,
-.body .add-more-time {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 250ms;
-}
 .body .increment {
     transition: opacity 250ms;
 }
@@ -42,6 +36,10 @@
 .body[data-state="occupied"][data-accept="true"] .clear {
     opacity: 1;
     pointer-events: initial;
+}
+.body[data-state="occupied"][data-accept="false"] .add-more-time {
+    opacity: 0;
+    pointer-events: none;
 }
 .body[data-state="occupied"] .vacant-controls {
     opacity: 0;
@@ -73,20 +71,20 @@
                     </a>
                 </div>
                 <div class="control-set occupied-controls">
-                    <a class="button add-more-time">
-                        <div class="icon-compartment">
-                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
-                        </div>
-                        <div class="text">
-                            I need more time<span class="description">Add another 30 minutes</span>
-                        </div>
-                    </a><br>
                     <a class="button clear">
                         <div class="icon-compartment">
                             <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
                         </div>
                         <div class="text">
                             I'm all done<span class="description">Make the room available for others</span>
+                        </div>
+                    </a><br>
+                    <a class="button add-more-time">
+                        <div class="icon-compartment">
+                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
+                        </div>
+                        <div class="text">
+                            I need more time<span class="description">Add another 30 minutes</span>
                         </div>
                     </a>
                 </div>
