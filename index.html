@@ -38,7 +38,7 @@
     pointer-events: initial;
 }
 .body[data-state="occupied"][data-accept="false"] .add-more-time {
-    opacity: 0;
+    opacity: 0.2;
     pointer-events: none;
 }
 .body[data-state="occupied"] .vacant-controls {
@@ -71,20 +71,20 @@
                     </a>
                 </div>
                 <div class="control-set occupied-controls">
-                    <a class="button clear">
-                        <div class="icon-compartment">
-                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
-                        </div>
-                        <div class="text">
-                            I'm all done<span class="description">Make the room available for others</span>
-                        </div>
-                    </a><br>
                     <a class="button add-more-time">
                         <div class="icon-compartment">
                             <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
                         </div>
                         <div class="text">
                             I need more time<span class="description">Add another 30 minutes</span>
+                        </div>
+                    </a><br>
+                    <a class="button clear">
+                        <div class="icon-compartment">
+                            <img class="icon" src="dist/svgs/plus.svg" height="40px" width="40px" />
+                        </div>
+                        <div class="text">
+                            I'm all done<span class="description">Make the room available for others</span>
                         </div>
                     </a>
                 </div>
